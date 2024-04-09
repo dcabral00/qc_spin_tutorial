@@ -1,0 +1,10 @@
+name: qc_spin_dynamics_tutorial_env 
+channels:
+  - defaults
+dependencies:
+  - matplotlib
+  - scipy
+  - numpy
+  - pip
+  - six
+  - git

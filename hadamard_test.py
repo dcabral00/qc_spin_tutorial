@@ -106,7 +106,9 @@ if __name__ == '__main__':
     # run_hadamard_test_boolean = False
     run_hadamard_test_boolean = True
 
-    simulator = BasicAer.get_backend('statevector_simulator')
+    # IMPORTANT: Use qasm_simulator to obtain meaningful statistics
+    # statevector is not appropriate for this method
+    simulator = BasicAer.get_backend('qasm_simulator')
 
     num_q = 3
     n_trotter_steps = 1
@@ -115,7 +117,7 @@ if __name__ == '__main__':
                                 + [[0.5, 0.5, 0.0, 1.0]
                                     for i in range(num_q-1)])
 
-    num_shots = 10 # increase to check for convergence
+    num_shots = 100 # increase to check for convergence
 
     evolution_timestep=0.1
     total_time = 25
@@ -133,11 +135,13 @@ if __name__ == '__main__':
     # for open controlled operation (ie if qubit is 0);
     # not used here for this correlation fxn but needed for others
     # controlled_time_evo_op = time_evo_op.control(ctrl_state=0)
+    print(controlled_time_evo_op.decompose())
 
 
     init_state_list = '1' + '0' * (num_q-1)
     init_circ = get_initialization(num_q, init_state_list)
     init_circ.draw(style='iqp')
+    print(init_circ)
 
     # lists t store observables
     if run_hadamard_test_boolean:
@@ -164,6 +168,9 @@ if __name__ == '__main__':
                     qc_had_imag, simulator, n_shots=num_shots)
             imag_amplitude = get_spin_correlation(had_imag_counts)
             imag_amp_list.append(imag_amplitude)
+            print(f'Finished step {idx}, where '
+                  f'Re = {real_amplitude:.3f} '
+                  f'Im = {imag_amplitude:.3f}')
     
         real_amp_array = np.array(real_amp_list)
         imag_amp_array = np.array(imag_amp_list)
@@ -199,8 +206,8 @@ if __name__ == '__main__':
     plt.plot(time_range, np_abs_correlation_with_hadamard_test,
              '.', label='Hadamard Test')
 
-    sa_statevector = np.load(f'{num_q}_spin_chain_SA_obs.npy')
-    time = np.load(f'{num_q}_spin_chain_time.npy')
+    sa_statevector = np.load(f'data/{num_q}_spin_chain_SA_obs.npy')
+    time = np.load(f'data/{num_q}_spin_chain_time.npy')
     plt.plot(time, sa_statevector, '-', label='Statevector')
 
     plt.xlabel('Time')

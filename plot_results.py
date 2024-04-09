@@ -38,8 +38,8 @@ if __name__ == '__main__':
     plt.plot(time, sa_tt_ksl, '-', label='TT-KSL',
              linewidth=5, color='gainsboro')
     plt.plot(time, sa_statevector, '--', label='Statevector')
-    plt.plot(time, sa_corr, '*', label='Hadamard Test')
-    plt.xlabel('Time')
+    plt.plot(time, sa_corr, '*', label=r'Hadamard Test, $\mathfrak{Re}+i\mathfrak{Im}$')
+    plt.xlabel(r'Time $\mathfrak{Re}$')
     plt.ylabel('Absolute Value of Survival Amplitude, '
                r'$\left|\langle \psi | \psi \rangle \right|$')
     plt.xlim((min(time), max(time)))

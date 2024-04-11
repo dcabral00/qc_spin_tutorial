@@ -51,7 +51,6 @@ if __name__ == '__main__':
                                     for i in range(num_q-1)])
     num_shots = 100
 
-    num_q = 3
     # Qubit basis states
     zero_state = np.array([[1],[0]])
     one_state = np.array([[0],[1]])

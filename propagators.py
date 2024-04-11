@@ -201,7 +201,7 @@ def get_manual_Trotter(num_q, pauli_ops, timestep, n_trotter=1,
 
 if __name__ == '__main__':
     num_shots = 100
-    num_q = 4
+    num_q = 3
     evolution_timestep = 0.1
     n_trotter_steps = 1
     # XX YY ZZ, Z

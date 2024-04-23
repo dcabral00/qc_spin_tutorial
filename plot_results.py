@@ -5,7 +5,7 @@ dpi=300
 plt.style.use('plot_style.txt')
 plt.rcParams['axes.linewidth'] = 1.5
 plt.rcParams['lines.markersize'] = 11 
-plt.rcParams["figure.figsize"] = (19.20, 10.80)
+plt.rcParams["figure.figsize"] = (6.4, 3.6)
  
 if __name__ == '__main__':
     num_q = 3
@@ -39,7 +39,7 @@ if __name__ == '__main__':
              linewidth=5, color='gainsboro')
     plt.plot(time, sa_statevector, '--', label='Statevector')
     plt.plot(time, sa_corr, '*', label=r'Hadamard Test, $\mathfrak{Re}+i\mathfrak{Im}$')
-    plt.xlabel(r'Time $\mathfrak{Re}$')
+    plt.xlabel(r'Time$')
     plt.ylabel('Absolute Value of Survival Amplitude, '
                r'$\left|\langle \psi | \psi \rangle \right|$')
     plt.xlim((min(time), max(time)))

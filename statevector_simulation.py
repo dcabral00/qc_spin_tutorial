@@ -6,6 +6,13 @@ from qiskit import BasicAer
 from propagators import get_time_evolution_operator
 
 
+dpi=300
+plt.style.use('plot_style.txt')
+plt.rcParams['axes.linewidth'] = 1.5
+plt.rcParams['lines.markersize'] = 11 
+plt.rcParams["figure.figsize"] = (6.4, 3.6)
+
+
 # Quantum circuit for propagation
 def qsolve_statevector(psin, qc):
     '''
@@ -23,21 +30,18 @@ def qsolve_statevector(psin, qc):
             psin (statevector): final statevector after execution
     '''
     # Determining number of qubits from the length of the state vector
-    n=np.size(psin)
     d=int(np.log2(np.size(psin)))
     # Circuit preparation
     qre = QuantumRegister(d)
     circ = QuantumCircuit(qre)
     circ.initialize(psin,qre)
     circ.barrier()
-    # for i in range(0,100):
     circ.append(qc, qre)
     circ.barrier()
     # Circuit execution
     device = BasicAer.get_backend('statevector_simulator')
     psin = execute(circ, backend=device).result()
-    psin = psin.get_statevector()
-    return psin
+    return psin.get_statevector()
 
 
 if __name__ == '__main__':
@@ -86,13 +90,19 @@ if __name__ == '__main__':
             psin_list.append(psin)
         correlation_list.append(np.vdot(psin_list[-1],psin0))
     
-    t = np.arange(0, evolution_timestep*(nsteps),
-                  evolution_timestep)
-    np.save(f'{num_q}_spin_chain_time', t)
+    time = np.arange(0, evolution_timestep*(nsteps),
+                     evolution_timestep)
+    np.save(f'{num_q}_spin_chain_time', time)
     sa_observable = np.abs(correlation_list)
     np.save(f'{num_q}_spin_chain_SA_obs', sa_observable)
     # plotting
-    plt.plot(t, sa_observable, '-o')
-    plt.ylabel('Survival Amplitude')
+    plt.plot(time, sa_observable, '-o')
+    plt.xlabel('Time')
+    plt.ylabel('Absolute Value of Survival Amplitude, '
+               r'$\left|\langle \psi | \psi \rangle \right|$')
+    plt.xlim((min(time), max(time)))
     plt.yscale('log')
+    plt.legend()
+    plt.savefig('statevector.pdf', format='pdf', dpi=dpi)
+    plt.savefig('statevector.png', format='png', dpi=dpi)
     plt.show()

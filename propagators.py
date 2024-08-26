@@ -108,7 +108,7 @@ def generate_circ_pattern_1qubit(circ, term, delta_t):
 
 
 def generate_circ_pattern_2qubit(circ, term, delta_t):
-    '''
+    r'''
         General 2-qubit gate for exponential of Paulis. This is the
         optimal decomposition, based on a component of a U(4) operator.
         (see )
@@ -121,9 +121,9 @@ def generate_circ_pattern_2qubit(circ, term, delta_t):
         Where CX represent CNOT operations, R are rotation gates with angles,
         and I is the identity matrix. The angles are parameterized as follows:
 
-        o = \theta = (\pi/2 - A)
-        p = \phi = (A - \pi/2)
-        l = \lambda = (\pi/2 - A)
+        $ o = \theta = (\pi/2 - A) $
+        $ p = \phi = (A - \pi/2) $
+        $ l = \lambda = (\pi/2 - A) $
 
         Where A is the exponential argument.
     '''

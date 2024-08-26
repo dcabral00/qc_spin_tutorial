@@ -1,12 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from qiskit import execute
+from custom_execute import execute
 from qiskit import QuantumCircuit, QuantumRegister
-from qiskit import BasicAer
+from qiskit_aer import Aer
 from propagators import get_time_evolution_operator
 
 
-dpi=300
+dpi = 300
 plt.style.use('plot_style.txt')
 plt.rcParams['axes.linewidth'] = 1.5
 plt.rcParams['lines.markersize'] = 11 
@@ -34,12 +34,12 @@ def qsolve_statevector(psin, qc):
     # Circuit preparation
     qre = QuantumRegister(d)
     circ = QuantumCircuit(qre)
-    circ.initialize(psin,qre)
+    circ.initialize(psin, qre)
     circ.barrier()
     circ.append(qc, qre)
     circ.barrier()
     # Circuit execution
-    device = BasicAer.get_backend('statevector_simulator')
+    device = Aer.get_backend('statevector_simulator')
     psin = execute(circ, backend=device).result()
     return psin.get_statevector()
 

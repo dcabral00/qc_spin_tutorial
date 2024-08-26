@@ -3,8 +3,8 @@
 from qiskit import QuantumCircuit
 from qiskit import QuantumRegister, ClassicalRegister
 from qiskit import transpile
-from qiskit import execute 
-from qiskit import BasicAer
+from custom_execute import execute 
+from qiskit_aer import Aer
 
 from propagators import get_time_evolution_operator
 
@@ -42,7 +42,7 @@ if __name__ == '__main__':
     print(qc)
     
     # checking the initial state
-    device = BasicAer.get_backend('statevector_simulator')
+    device = Aer.get_backend('statevector_simulator')
     qc_init_state = execute(qc, backend=device).result()
     qc_init_state = qc_init_state.get_statevector()
     print(qc_init_state)

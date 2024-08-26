@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from qiskit import execute, BasicAer
+from custom_execute import execute
+from qiskit_aer import Aer
 from qiskit import QuantumCircuit
 from qiskit import QuantumRegister, ClassicalRegister
 from propagators import get_time_evolution_operator
@@ -108,7 +109,7 @@ if __name__ == '__main__':
 
     # IMPORTANT: Use qasm_simulator to obtain meaningful statistics
     # statevector is not appropriate for this method
-    simulator = BasicAer.get_backend('qasm_simulator')
+    simulator = Aer.get_backend('qasm_simulator')
 
     num_q = 3
     n_trotter_steps = 1
@@ -120,7 +121,7 @@ if __name__ == '__main__':
     num_shots = 100 # increase to check for convergence
 
     evolution_timestep=0.1
-    total_time = 25
+    total_time = 250
     time_range = np.arange(0, total_time+evolution_timestep,
                            evolution_timestep)
 

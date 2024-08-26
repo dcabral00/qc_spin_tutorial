@@ -27,17 +27,17 @@ def get_hamiltonian_n_site_terms(n, coeff, n_qubits):
 
 
 def get_heisenberg_hamiltonian(n_qubits, coeff=None):
-    '''
+    r'''
         Takes an integer number corresponding to number of spins/qubits
         and a list of sublists containing the necessary coefficients
         to assemble the complete Hamiltonian:
-
+        $$
             H = \sum _i ^N h_z Z_i
                 + \sum _i ^{N-1} (h_xx X_iX_{i+1}
                                   + h_yy Y_iY_{i+1}
                                   + h_zz Z_iZ_{i+1}
                                  )
-
+        $$
         Each sublist contains the [XX, YY, ZZ, Z] coefficients in this order.
         The last sublist should have the same shape, but only the Z component
         is used.

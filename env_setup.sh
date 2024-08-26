@@ -5,9 +5,9 @@ conda activate qc_spin_dynamics_tutorial_env
 # Ensure that the conda version of pip is the one being used
 # to enforce that qiskit is contained within that environment
 # Then run the following installation commands
-# pip install 'qiskit==0.45.0'
-# pip install 'qiskit-aer==0.13.0'
-# pip install 'qiskit-ibm-provider==0.7.2'
+# pip install 'qiskit'
+# pip install 'qiskit-aer'
+# pip install 'qiskit-ibm-runtime'
 
 # If ttpy is needed for the classical simulations;
 # this fork fixes some issues with the original repository maintained
